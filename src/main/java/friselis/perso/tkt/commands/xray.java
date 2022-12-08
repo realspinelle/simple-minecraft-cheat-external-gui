@@ -30,6 +30,9 @@ public class xray {
                 context.getSource().sendFeedback(Text.literal("The item " + itemName + " is already in the list"));
             } else {
                 Tkt.XrayBlocks.add(itemName);
+                if (Tkt.XrayEnabled) {
+                    MinecraftClient.getInstance().worldRenderer.reload();
+                }
                 context.getSource().sendFeedback(Text.literal("You added " + itemName + " block to xray view"));
             }
             return 1;
@@ -46,6 +49,9 @@ public class xray {
             }
             if (exist) {
                 Tkt.XrayBlocks.remove(index);
+                if (Tkt.XrayEnabled) {
+                    MinecraftClient.getInstance().worldRenderer.reload();
+                }
                 context.getSource().sendFeedback(Text.literal("You removed " + itemName + " block to xray view"));
             } else {
                 context.getSource().sendFeedback(Text.literal("The item " + itemName + " is not in the list"));
