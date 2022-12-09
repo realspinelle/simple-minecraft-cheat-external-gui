@@ -17,7 +17,7 @@ public class gamemode {
 
         for (int var4 = 0; var4 < var3; ++var4) {
             GameMode gameMode = var2[var4];
-            builder.then((literal(gameMode.getName()).executes((context) -> {
+            builder.then((literal(gameMode.getName()).executes((ctx) -> {
                 assert MinecraftClient.getInstance().interactionManager != null;
                 MinecraftClient.getInstance().interactionManager.setGameMode(gameMode);
                 return 1;

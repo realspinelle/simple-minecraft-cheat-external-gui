@@ -1,6 +1,8 @@
 plugins {
     id 'fabric-loom' version '1.0-SNAPSHOT'
     id 'maven-publish'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
 version = project.mod_version
@@ -14,6 +16,11 @@ repositories {
     // for more information about repositories.
 }
 
+javafx {
+    version = "19"
+    modules = [ 'javafx.controls' ]
+}
+
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -22,6 +29,7 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    implementation 'io.github.palexdev:materialfx:11.13.5'
 }
 
 processResources {

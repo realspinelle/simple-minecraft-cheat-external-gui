@@ -21,31 +21,30 @@ public class Tkt implements ClientModInitializer {
     public static Logger logger = LogManager.getLogger();
     public static double FALL_VELOCITY = -0.04;
     private int flyTicks;
-
     public static boolean XrayEnabled = false;
+    public static boolean NoFall = false;
+    public static boolean NoFood = false;
     public static List<String> XrayBlocks = new LinkedList<>(List.of("minecraft:gold_ore"));
 
     @Override
     public void onInitializeClient() {
+        HelloWorld.run();
         ClientCommandRegistrationCallback.EVENT.register(this::registerCommands);
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
-            if (client.player != null && client.player.getAbilities().flying) {
+            if (client.player != null && client.player.getAbilities().flying && !client.player.isSneaking() && !client.player.isOnGround() && !client.player.isTouchingWater() && !client.player.isFallFlying()) {
                 flyTicks--;
                 Vec3d pos = client.player.getPos();
                 if (flyTicks < 0) {
-                    if (client.player != null && !client.player.isOnGround() && !client.player.isTouchingWater() && !client.player.isFallFlying()) {
                         PlayerMoveC2SPacket packet = new PlayerMoveC2SPacket.Full(pos.x, pos.y-FALL_VELOCITY, pos.z, 0, 0, false);
                         ClientConnection connection = Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).getConnection();
                         connection.send(packet);
-                    }
                     flyTicks = 8;
                 }
                 if (flyTicks == 7) {
-                    if (client.player != null && !client.player.isOnGround() && !client.player.isTouchingWater() && !client.player.isFallFlying()) {
                         PlayerMoveC2SPacket packet = new PlayerMoveC2SPacket.Full(pos.x, pos.y+FALL_VELOCITY, pos.z, 0, 0, false);
                         ClientConnection connection = Objects.requireNonNull(MinecraftClient.getInstance().getNetworkHandler()).getConnection();
                         connection.send(packet);
-                    }
+
                 }
             } else {
                 flyTicks = 0;
@@ -61,5 +60,8 @@ public class Tkt implements ClientModInitializer {
         fly.register(dispatcher);
         flyspeed.register(dispatcher);
         xray.register(dispatcher, registryAccess);
+        gui.register(dispatcher);
+        nofall.register(dispatcher);
+        nofood.register(dispatcher);
     }
 }

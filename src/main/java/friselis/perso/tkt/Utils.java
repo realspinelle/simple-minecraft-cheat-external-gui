@@ -8,5 +8,8 @@ public class Utils {
         double patchedZ = (((double) args.get(2) * 1000) - ((double) args.get(2) * 1000 % 10)) / 1000;
         args.set(0, patchedX);
         args.set(2, patchedZ);
+        if (Tkt.NoFall) {
+            args.set(5, true);
+        }
     }
 }

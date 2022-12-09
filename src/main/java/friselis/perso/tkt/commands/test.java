@@ -7,7 +7,7 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.lit
 
 public class test {
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        dispatcher.register(literal("test").executes((context) -> {
+        dispatcher.register(literal("test").executes((ctx) -> {
             return 1;
         }));
     }

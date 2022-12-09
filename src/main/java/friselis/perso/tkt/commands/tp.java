@@ -10,9 +10,9 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
 
 public class tp {
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        dispatcher.register(literal("tp").then(argument("location", Vec3ArgumentType.vec3()).executes((context) -> {
+        dispatcher.register(literal("tp").then(argument("location", Vec3ArgumentType.vec3()).executes((ctx) -> {
             assert MinecraftClient.getInstance().player != null;
-            Vec3d pos = Vec3ArgumentType.getPosArgument(context, "location").toAbsolutePos(context.getSource());
+            Vec3d pos = Vec3ArgumentType.getPosArgument(ctx, "location").toAbsolutePos(ctx.getSource());
             MinecraftClient.getInstance().player.setPosition(pos);
             return 1;
         })));
