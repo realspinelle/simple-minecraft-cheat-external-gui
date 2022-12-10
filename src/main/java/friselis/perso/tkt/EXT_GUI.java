@@ -5,14 +5,12 @@ import io.github.palexdev.materialfx.enums.ButtonType;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import net.minecraft.client.MinecraftClient;
 
-public class HelloWorld extends Application {
+public class EXT_GUI extends Application {
     public static Stage pStage;
     @Override
     public void start(Stage primaryStage) {

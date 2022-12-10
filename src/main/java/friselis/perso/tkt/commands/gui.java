@@ -1,10 +1,9 @@
 package friselis.perso.tkt.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
-import friselis.perso.tkt.HelloWorld;
+import friselis.perso.tkt.EXT_GUI;
 import javafx.application.Platform;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
-import net.minecraft.client.MinecraftClient;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
@@ -13,10 +12,10 @@ public class gui {
         dispatcher.register(literal("gui").executes(ctx -> {
             Platform.runLater(
                     () -> {
-                        if (HelloWorld.pStage.isShowing()) {
-                            HelloWorld.pStage.close();
+                        if (EXT_GUI.pStage.isShowing()) {
+                            EXT_GUI.pStage.close();
                         } else {
-                            HelloWorld.pStage.show();
+                            EXT_GUI.pStage.show();
                         }
                     }
             );

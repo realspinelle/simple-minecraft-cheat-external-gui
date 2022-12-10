@@ -18,16 +18,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ClientPlayNetworkHandlerMixin {
     @Inject(method = "onGameStateChange", at = @At("HEAD"), cancellable = true)
     public void cancelGameStateChange(GameStateChangeS2CPacket packet, CallbackInfo ci) {
-        if (packet.getReason() == GameStateChangeS2CPacket.GAME_MODE_CHANGED ||
-                packet.getReason() == GameStateChangeS2CPacket.DEMO_MESSAGE_SHOWN ||
-                packet.getReason() == GameStateChangeS2CPacket.GAME_WON) {
+        if (packet.getReason() == GameStateChangeS2CPacket.GAME_MODE_CHANGED
+                || packet.getReason() == GameStateChangeS2CPacket.DEMO_MESSAGE_SHOWN
+        ) {
             ci.cancel();
         }
     }
+
     @Inject(method = "onWorldBorderInitialize", at = @At("HEAD"), cancellable = true)
     public void cancelWorldBorderInitialize(WorldBorderInitializeS2CPacket packet, CallbackInfo ci) {
         ci.cancel();
     }
+
     @Inject(method = "onHealthUpdate", at = @At("HEAD"), cancellable = true)
     public void cancelFoodAndSaturation(HealthUpdateS2CPacket packet, CallbackInfo ci) {
         if (MinecraftClient.getInstance().player != null && Tkt.NoFood) {

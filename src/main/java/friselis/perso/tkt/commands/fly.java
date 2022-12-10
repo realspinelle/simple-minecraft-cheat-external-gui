@@ -11,9 +11,8 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.lit
 public class fly {
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
         dispatcher.register(literal("fly").executes((ctx) -> {
-            ctx.getSource().getPlayer().getAbilities().flying = !ctx.getSource().getPlayer().getAbilities().flying;
-            if (ctx.getSource().getPlayer().getAbilities().flying) {
-                ctx.getSource().getPlayer().setPosition(ctx.getSource().getPlayer().getPos().add(0,1,0));
+            ctx.getSource().getPlayer().getAbilities().allowFlying = !ctx.getSource().getPlayer().getAbilities().allowFlying;
+            if (ctx.getSource().getPlayer().getAbilities().allowFlying) {
                 ctx.getSource().sendFeedback(Text.literal(MessageFormat.format("Flight on {0}", ctx.getSource().getPlayer().getAbilities().getFlySpeed())));
             } else {
                 ctx.getSource().sendFeedback(Text.literal("Flight off"));
